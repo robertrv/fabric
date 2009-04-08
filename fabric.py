@@ -778,7 +778,9 @@ def invoke(*commands):
             cmd, args, kwargs = item, [], {}
         if isinstance(cmd, basestring):
             cmd = COMMANDS[item]
-        _execute_command(cmd.__name__, args, kwargs, skip_executed=True)
+        if 'skip_executed' in kwargs:
+            s_e = (str(kwargs.pop('skip_executed')) != 'False')
+        _execute_command(cmd.__name__, args, kwargs, skip_executed=s_e)
 
 #
 # Standard Fabric commands:
