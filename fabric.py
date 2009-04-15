@@ -85,6 +85,7 @@ DEFAULT_ENV = {
     'fab_fail': 'abort',
     'fab_quiet': False,
     'fab_sudo_noshell': False,
+    'fab_skip_executed': True,
 }
 
 class Configuration(dict):
@@ -778,6 +779,8 @@ def invoke(*commands):
             cmd, args, kwargs = item, [], {}
         if isinstance(cmd, basestring):
             cmd = COMMANDS[item]
+        
+        s_e = env['fab_skip_executed']
         if 'skip_executed' in kwargs:
             s_e = (str(kwargs.pop('skip_executed')) != 'False')
         _execute_command(cmd.__name__, args, kwargs, skip_executed=s_e)
