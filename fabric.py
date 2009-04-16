@@ -780,7 +780,7 @@ def invoke(*commands):
         if isinstance(cmd, basestring):
             cmd = COMMANDS[item]
         
-        s_e = env['fab_skip_executed']
+        s_e = ENV['fab_skip_executed']
         if 'skip_executed' in kwargs:
             s_e = (str(kwargs.pop('skip_executed')) != 'False')
         _execute_command(cmd.__name__, args, kwargs, skip_executed=s_e)
